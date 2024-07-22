@@ -9,3 +9,13 @@ Content-Type: application/json
     "email": "marlon@gmail.com",
     "password": "123456"
 }
+
+###
+
+POST {{apiurl}}/sessions/password
+Content-Type: application/json
+
+{
+    "email": "marlon@gmail.com",
+    "password": "123456"
+}
