@@ -19,3 +19,8 @@ Content-Type: application/json
     "email": "marlon@gmail.com",
     "password": "123456"
 }
+
+###
+GET {{apiurl}}/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NzZiOWI3Yi00NTI1LTQwYzUtODA1ZC0xMGVhYWNkNzg1MTgiLCJpYXQiOjE3MjE2OTYwODYsImV4cCI6MTcyMjMwMDg4Nn0.aRocqnH_wbVBjDAj0xb2WheakogpMQiav0PP3BCHDMM
