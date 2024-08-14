@@ -121,6 +121,12 @@ importers:
       '@saas/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@saas/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@saas/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
       '@saas/ts-config':
         specifier: workspace:*
         version: link:../../config/typescript-config
