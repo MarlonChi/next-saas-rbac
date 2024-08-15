@@ -14,6 +14,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "ky": "^1.6.0",
     "lucide-react": "^0.427.0",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-f994737d14-20240522",
@@ -24,9 +25,9 @@
   "devDependencies": {
     "@saas/auth": "workspace:*",
     "@saas/env": "workspace:*",
-    "@saas/ts-config": "workspace:*",
     "@saas/eslint-config": "workspace:*",
     "@saas/prettier": "workspace:*",
+    "@saas/ts-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
