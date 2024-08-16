@@ -1,10 +1,11 @@
 'use client'
 
-import { useActionState } from 'react'
-import Link from 'next/link'
+import { FormEvent, useState, useTransition } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { AlertTriangle, Loader2 } from 'lucide-react'
 
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,16 +14,39 @@ import { Separator } from '@/components/ui/separator'
 import { signInWithEmailAndPassword } from './actions'
 
 import githubIcon from '@/assets/github.svg'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 export function SignInForm() {
-  const [{ success, message, errors }, formAction, isPending] = useActionState(
-    signInWithEmailAndPassword,
-    { success: false, message: null, errors: null }
-  )
+  // const [{ errors, message, success }, formAction, isPending] = useActionState(
+  //   signInWithEmailAndPassword,
+  //   { success: false, message: null, errors: null },
+  // )
+
+  const [isPending, startTransition] = useTransition()
+  const [{ success, message, errors }, setFormState] = useState<{
+    success: boolean
+    message: string | null
+    errors: Record<string, string[]> | null
+  }>({
+    success: false,
+    message: null,
+    errors: null,
+  })
+
+  async function handleSignIn(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const data = new FormData(form)
+
+    startTransition(async () => {
+      const state = await signInWithEmailAndPassword(data)
+
+      setFormState(state)
+    })
+  }
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form onSubmit={handleSignIn} className="space-y-4">
       {success === false && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
@@ -32,6 +56,7 @@ export function SignInForm() {
           </AlertDescription>
         </Alert>
       )}
+
       <div className="space-y-1">
         <Label htmlFor="email">E-mail</Label>
         <Input name="email" type="email" id="email" />
@@ -42,6 +67,7 @@ export function SignInForm() {
           </p>
         )}
       </div>
+
       <div className="space-y-1">
         <Label htmlFor="password">Password</Label>
         <Input name="password" type="password" id="password" />
@@ -60,7 +86,7 @@ export function SignInForm() {
         </Link>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isPending}>
+      <Button className="w-full" type="submit" disabled={isPending}>
         {isPending ? (
           <Loader2 className="size-4 animate-spin" />
         ) : (
@@ -68,7 +94,7 @@ export function SignInForm() {
         )}
       </Button>
 
-      <Button variant="link" className="w-full" size="sm" asChild>
+      <Button className="w-full" variant="link" size="sm" asChild>
         <Link href="/auth/sign-up">Create new account</Link>
       </Button>
 
