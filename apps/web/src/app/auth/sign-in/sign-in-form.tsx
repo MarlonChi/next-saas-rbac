@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { AlertTriangle, Loader2 } from 'lucide-react'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -16,13 +17,13 @@ import { useFormState } from '@/hooks/use-form-state'
 import githubIcon from '@/assets/github.svg'
 
 export function SignInForm() {
-  // const [{ errors, message, success }, formAction, isPending] = useActionState(
-  //   signInWithEmailAndPassword,
-  //   { success: false, message: null, errors: null },
-  // )
+  const router = useRouter()
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    () => {
+      router.push('/')
+    }
   )
 
   return (
