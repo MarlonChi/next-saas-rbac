@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import { Slash } from 'lucide-react'
 
 import rocketseatIcon from '@/assets/rocketseat-icon.svg'
 import { ProfileButton } from './profile-button'
+import { OrganizationSwitcher } from './organization-switcher'
 
 export const Header = () => {
   return (
@@ -12,6 +14,9 @@ export const Header = () => {
           alt="Rocketseat"
           className="size-6 dark:invert"
         />
+        <Slash className="size-3 -rotate-[24deg] text-border" />
+
+        <OrganizationSwitcher />
       </div>
 
       <div className="flex items-center gap-4">
