@@ -1,6 +1,6 @@
 'use client'
 
-import { Sun } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { Button } from '../ui/button'
 
 import {
@@ -18,8 +18,8 @@ export const ThemeSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
-          {resolvedTheme === 'light' && <Sun className="size-4" />}
-          {resolvedTheme === 'dark' && <Sun className="size-4" />}
+          <Sun className="size-4 dark:invisible dark:size-0" />
+          <Moon className="size-0 dark:visible dark:size-4" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
