@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { getOrganizations } from '@/http/get-organization'
+import { getOrganizations } from '@/http/get-organizations'
 import { getCurrentOrg } from '@/auth/auth'
 
 export const OrganizationSwitcher = async () => {
