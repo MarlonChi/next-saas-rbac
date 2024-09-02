@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { cookies } from 'next/headers'
 
 import { signInWithPassword } from '@/http/sign-in-with-password'
+import { acceptInvite } from '@/http/accept-invite'
 
 interface ErrorResponse {
   message: string
@@ -39,7 +40,16 @@ export async function signInWithEmailAndPassword(data: FormData) {
       maxAge: 60 * 60 * 24 * 7, // 7 days
     })
 
-    console.log(token)
+    const inviteId = cookies().get('inviteId')?.value
+
+    if (inviteId) {
+      try {
+        await acceptInvite(inviteId)
+        cookies().delete('inviteId')
+      } catch (e) {
+        console.log(e)
+      }
+    }
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = (await err.response.json()) as ErrorResponse
